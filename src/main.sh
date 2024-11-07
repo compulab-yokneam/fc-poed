@@ -44,7 +44,7 @@ exit 1
 SN=$(dmidecode -t 2 | awk '(/Serial Number:/)&&($0=$NF)')
 MAC_ADDR=$(awk -v sn=${SN} '($0~sn)&&($0=$2)' ${MAC_FILE})
 [[ -n ${MAC_ADDR} ]] || {
-MAC_ADDR==${SN/-/}
+MAC_ADDR=${SN/-/}
 MAC_ADDR="0001c0${MAC_ADDR:6}"
 cat << eof
 	No mac for ${SN} in the ${MAC_FILE}
